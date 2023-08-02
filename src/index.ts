@@ -191,5 +191,11 @@ export function getImageUrl(
   const hmac = generateHmac(options.secret, options.salt);
   const signature = generateSignature(hmac, encodedUrlWithModifiers);
 
-  return joinURL(options.baseURL ?? '/', signature, encodedUrlWithModifiers);
+  url = "";
+  if(options.baseURL) {
+    url = joinURL(options.baseURL, signature, encodedUrlWithModifiers);
+  } else {
+    url = joinURL('/', signature, encodedUrlWithModifiers);
+  }
+  return url;
 }
